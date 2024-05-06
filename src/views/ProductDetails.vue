@@ -7,7 +7,7 @@
     </div>
     <div v-else-if="currentItem">
       <h2>{{ currentItem.name }}</h2>
-      <img :src="currentItem.thumbnailUrl" alt="product" class="img" />
+      <img :src="currentItem.thumbnailUrl" :alt="currentItem.name" />
       <p>Price: {{ currentItem.defaultDisplayedPriceFormatted }}</p>
       <h5>Description</h5>
       <div v-html="currentItem.description"></div>
@@ -49,12 +49,21 @@ section {
   padding: 0.5rem;
 }
 img {
-  max-width: 500px;
-  max-height: 500px;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 5px;
+  box-shadow: var(--shadow-2);
+  object-fit: cover;
 }
 .btn-block {
   display: block;
   width: 30%;
   margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  img {
+    width: 31rem;
+    height: 31rem;
+  }
 }
 </style>

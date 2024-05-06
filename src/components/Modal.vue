@@ -1,5 +1,5 @@
 <template>
-  <Teleport to="body" v-if="showModal">
+  <Teleport to="body" v-if="isOpen">
     <div class="modal-mask" @click="emit('close-modal')">
       <div class="modal-container" @click.prevent.stop>
         <slot class="modal-header" name="header" />
@@ -11,20 +11,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { onUnmounted, watch } from 'vue'
 
 const props = defineProps<{
   isOpen: boolean
 }>()
 const emit = defineEmits(['close-modal'])
 
-const showModal = computed(() => {
-  if (props.isOpen) {
-    document.body.classList.add('modal-open')
-  } else {
-    document.body.classList.remove('modal-open')
+watch(
+  () => props.isOpen,
+  () => {
+    document.body.classList.toggle('modal-open', props.isOpen)
   }
-  return props.isOpen
+)
+
+onUnmounted(() => {
+  document.body.classList.remove('modal-open')
 })
 </script>
 

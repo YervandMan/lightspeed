@@ -3,7 +3,12 @@
     <h5>Categories</h5>
     <div v-if="isLoading" class="loading" />
     <div v-else-if="error">Oops! Failed to load categories</div>
-    <div v-else v-for="category in categories" :key="category.id">
+    <div
+      v-else
+      v-for="category in categories"
+      :key="category.id"
+      class="category-item"
+    >
       <RouterLink :to="`/category/${category.id}`" class="link">
         <img :src="category.thumbnailUrl" :alt="category.name" />
         <p>{{ category.name }}</p>
@@ -43,9 +48,10 @@ aside {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  justify-content: center;
   margin-inline: 1rem;
-  max-width: 15rem;
+}
+.category-item {
+  max-width: 100%;
 }
 .loading {
   width: 2rem;
@@ -64,9 +70,15 @@ aside {
 .link:hover {
   background-color: var(--grey-50);
 }
+.router-link-exact-active {
+  background-color: var(--grey-100);
+}
 
 p {
   margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 h5 {
   font-size: 1rem;
@@ -76,11 +88,13 @@ h5 {
 img {
   width: 20px;
   height: 20px;
-  margin: 0 auto;
+  margin: 0.15rem;
+  border-radius: var(--borderRadius);
 }
 @media screen and (min-width: 768px) {
   aside {
     flex-direction: column;
+    width: 10rem;
   }
   p,
   h5 {

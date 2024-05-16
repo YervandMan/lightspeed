@@ -157,6 +157,11 @@ ul {
   color: var(--primary-200);
   background: var(--primary-700);
 }
+.btn:disabled {
+  box-shadow: var(--shadow-1);
+  background: var(--grey-300);
+  cursor: not-allowed;
+}
 .btn-block {
   width: 100%;
 }

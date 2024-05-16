@@ -3,7 +3,12 @@
     <div v-if="isLoading" class="loading"></div>
     <div v-else-if="error">Oops! Failed to load products</div>
     <div v-else class="product-list">
-      <Item v-for="item in items" :key="item.id" :item />
+      <Item
+        v-for="item in items"
+        :key="item.id"
+        :item
+        :isInCart="isItemInCart(String(item.id))"
+      />
     </div>
   </section>
 </template>
@@ -17,7 +22,7 @@ import { storeToRefs } from 'pinia'
 
 const productsStore = useProductsStore()
 
-const { getProductsByCategory, getAllProducts } = productsStore
+const { getProductsByCategory, getAllProducts, isItemInCart } = productsStore
 const { isLoading, error, items } = storeToRefs(productsStore)
 
 const route = useRoute()

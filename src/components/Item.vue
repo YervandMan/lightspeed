@@ -7,10 +7,11 @@
         <p>{{ item.name }}</p>
       </div>
     </div>
-    <div v-if="!isInCart">
+    <div v-if="!displayInCart">
       <button
         type="button"
         class="btn btn-block"
+        :disabled="isInCart"
         @click="addToCart(String(item.id))"
       >
         buy now
@@ -39,11 +40,12 @@ import { toRefs, unref } from 'vue'
 
 const props = defineProps<{
   item: ProductEntry
+  displayInCart?: boolean
   isInCart?: boolean
 }>()
 const emit = defineEmits(['placeOrder'])
 
-const { isInCart, item } = toRefs(props)
+const { displayInCart, isInCart, item } = toRefs(props)
 const productsStore = useProductsStore()
 
 const { addToCart, removeFromCart } = productsStore

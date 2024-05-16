@@ -14,6 +14,7 @@
       <button
         type="button"
         class="btn btn-block"
+        :disabled="isItemInCart(String(currentItem.id))"
         @click="addToCart(String(currentItem.id))"
       >
         Buy
@@ -30,7 +31,7 @@ import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 const productsStore = useProductsStore()
-const { addToCart, getProduct } = productsStore
+const { addToCart, getProduct, isItemInCart } = productsStore
 const { isLoading, error, currentItem } = storeToRefs(productsStore)
 
 watch(

@@ -105,6 +105,7 @@ export const useProductsStore = defineStore('productsStore', () => {
     cartItems.value = cartItems.value.filter((item) => item.id !== id)
     localStorage.cart = JSON.stringify(cartIds.value)
   }
+  const isItemInCart = (id: string) => cartIds.value.includes(id)
 
   return {
     isLoading,
@@ -119,5 +120,6 @@ export const useProductsStore = defineStore('productsStore', () => {
     getCartItems,
     addToCart,
     removeFromCart,
+    isItemInCart,
   }
 })

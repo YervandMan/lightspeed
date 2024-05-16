@@ -7,7 +7,7 @@
   </div>
   <section v-else-if="cartItems.length">
     <div v-for="item in cartItems" :key="item.id">
-      <Item :item isInCart @placeOrder="onPlaceOrder" />
+      <Item :item displayInCart @placeOrder="onPlaceOrder" />
     </div>
   </section>
   <div v-else>
